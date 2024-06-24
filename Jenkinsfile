@@ -14,10 +14,6 @@ pipeline {
         global_account_password='gap'
     }
 
-    parameters {
-        "emails": ["first@test.com", "second@test.com"]
-    }
-
     stages {
         stage('Terraform Init') {
             steps {
