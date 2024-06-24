@@ -16,6 +16,8 @@ pipeline {
 
         string(name: 'subaccount_id', defaultValue: 'ddb78c82-1907-4b39-8b47-d5ee82971a4e', description: 'Input the subaccount id')
         string(name: 'admins', defaultValue: 'sample@email.com', description: '')
+
+        booleanParam(name: 'auto_approved', defaultValue: false, description: 'Flag to auto approve for terraform apply')
     }
 
     stages {
@@ -55,6 +57,9 @@ pipeline {
         }
 
         stage('Terraform apply'){
+            when {
+                params.auto_approved true
+            }
             steps {
                 echo 'Terraform apply...'
                 withCredentials([usernamePassword(credentialsId: 'btpProviderCreds', passwordVariable: 'TF_VAR_global_account_password', usernameVariable: 'TF_VAR_global_account_username')]) {
