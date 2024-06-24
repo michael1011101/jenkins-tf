@@ -43,7 +43,7 @@ pipeline {
                         echo env.TF_VAR_global_account_subdomain
                         echo params.admins
                         env.TF_VAR_subaccount_id=params.subaccount_id
-                        env.TF_VAR_admins=params.DEPLOY_TEXT
+                        env.TF_VAR_admins=[params.DEPLOY_TEXT]
 
                         sh '''
                         terraform plan
