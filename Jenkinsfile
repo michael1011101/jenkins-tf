@@ -11,6 +11,9 @@ pipeline {
     }
 
     parameters {
+        string(name: 'global_account_subdomain', defaultValue: 'hello subdomain', description: 'subdomain of global account')
+        string(name: 'cli_server_url', defaultValue: 'https://cli.btp.cloud.sap', description: 'cli_server_url for this global account')
+
         string(name: 'admins', defaultValue: 'helle admins', description: 'What should I say?')
     }
 
@@ -33,7 +36,10 @@ pipeline {
                     script {
                         echo env.TF_VAR_clientsecret
                         echo env.TF_VAR_clientid
-                        echo env.cli_server_url
+                        env.TF_VAR_global_account_subdomain=env.global_account_subdomain
+                        env.TF_VAR_cli_server_url=env.cli_server_url
+                        echo env.TF_VAR_cli_server_url
+                        echo env.TF_VAR_global_account_subdomain
                         echo params.admins
                     }
                 }
