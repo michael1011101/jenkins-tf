@@ -58,9 +58,9 @@ pipeline {
             steps {
                 echo 'Terraform apply...'
                 script {
-                    echo env.TF_VAR_cli_server_url
-                    echo env.TF_VAR_global_account_subdomain
-                    echo env.TF_VAR_admins
+                    sh '''
+                    terraform apply
+                    '''
                 }
             }
         }
