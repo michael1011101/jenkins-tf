@@ -1,11 +1,7 @@
 #!groovy
 
 pipeline {
-    agent {
-        node {
-            label 'docker-agent-tf'
-        }
-    }
+    agent any
 
     environment {
         global_account_subdomain='<abc>'
