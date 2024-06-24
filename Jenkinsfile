@@ -67,7 +67,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'btpProviderCreds', passwordVariable: 'TF_VAR_global_account_password', usernameVariable: 'TF_VAR_global_account_username')]) {
                     script {
                         sh '''
-                        terraform apply
+                        terraform apply -auto-approve
                         '''
                     }
                 }
