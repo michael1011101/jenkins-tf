@@ -57,10 +57,12 @@ pipeline {
         stage('Terraform apply'){
             steps {
                 echo 'Terraform apply...'
-                script {
-                    sh '''
-                    terraform apply
-                    '''
+                withCredentials([usernamePassword(credentialsId: 'btpProviderCreds', passwordVariable: 'TF_VAR_global_account_password', usernameVariable: 'TF_VAR_global_account_username')]) {
+                    script {
+                        sh '''
+                        terraform apply
+                        '''
+                    }
                 }
             }
         }
