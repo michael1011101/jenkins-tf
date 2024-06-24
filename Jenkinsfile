@@ -15,7 +15,7 @@ pipeline {
         string(name: 'cli_server_url', defaultValue: 'https://canary.cli.btp.int.sap', description: 'cli_server_url for this global account')
 
         string(name: 'subaccount_id', defaultValue: 'ddb78c82-1907-4b39-8b47-d5ee82971a4e', description: 'Input the subaccount id')
-        string(name: 'admins', defaultValue: 'sample@email.com', description: '')
+        string(name: 'admins', defaultValue: '["sample@email.com", "sample2@email.com"]', description: 'Input the email list formated as ["1@email.com", "2@email.com]')
 
         booleanParam(name: 'auto_approved', defaultValue: false, description: 'Flag to auto approve for terraform apply')
     }

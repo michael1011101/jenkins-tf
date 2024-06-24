@@ -3,8 +3,8 @@ variable "subaccount_id" {
   description = "Input subaccount GUID"
 }
 
-variable "admin" {
-  type = string
+variable "admins" {
+  type = list(string)
 }
 
 
@@ -13,7 +13,8 @@ data "btp_subaccount" "subaccount" {
 }
 
 resource "btp_subaccount_role_collection_assignment" "name" {
+  for_each = toset(var.admins)
   subaccount_id        = data.btp_subaccount.subaccount.id
   role_collection_name = "Subaccount Viewer"
-  user_name            = var.admin
+  user_name            = each.value
 }
