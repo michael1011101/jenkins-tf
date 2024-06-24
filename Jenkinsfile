@@ -42,7 +42,11 @@ pipeline {
                         echo env.TF_VAR_cli_server_url
                         echo env.TF_VAR_global_account_subdomain
                         echo params.admins
-                        echo params.DEPLOY_TEXT
+                        env.TF_VAR_admins=params.DEPLOY_TEXT
+
+                        sh '''
+                        terraform plan
+                        '''
                     }
                 }
             }
