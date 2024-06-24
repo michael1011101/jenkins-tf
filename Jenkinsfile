@@ -17,11 +17,12 @@ pipeline {
     stages {
         stage('Terraform Init') {
             steps {
-                docker pull hashicorp/terraform:light
-                echo 'Terraform Init..'
-                echo '${pwd}'
-                sh 'pwd'
-                docker run --rm -v ${PWD}:/workspace -w /workspace hashicorp/terraform:light init
+                script {
+                    sh '''
+                    echo 'Terraform Init...'
+                    terraform init
+                    '''
+                }
             }
         }
 
