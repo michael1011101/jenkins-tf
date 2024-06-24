@@ -11,10 +11,10 @@ pipeline {
     }
 
     parameters {
-        string(name: 'global_account_subdomain', defaultValue: 'hello subdomain', description: 'subdomain of global account')
-        string(name: 'cli_server_url', defaultValue: 'https://cli.btp.cloud.sap', description: 'cli_server_url for this global account')
+        string(name: 'global_account_subdomain', defaultValue: 'hana-cloud-dev-cluster', description: 'subdomain of global account')
+        string(name: 'cli_server_url', defaultValue: 'https://canary.cli.btp.int.sap', description: 'cli_server_url for this global account')
 
-        string(name: 'subaccount_id', defaultValue: 'subaccount_id', description: 'Input the subaccount id')
+        string(name: 'subaccount_id', defaultValue: 'ddb78c82-1907-4b39-8b47-d5ee82971a4e', description: 'Input the subaccount id')
         string(name: 'admins', defaultValue: 'sample@email.com', description: '')
     }
 
