@@ -14,8 +14,8 @@ pipeline {
         string(name: 'global_account_subdomain', defaultValue: 'hello subdomain', description: 'subdomain of global account')
         string(name: 'cli_server_url', defaultValue: 'https://cli.btp.cloud.sap', description: 'cli_server_url for this global account')
 
-        string(name: 'subaccount_id', defaultValue: 'subaccount_id', description: 'What should I say?')
-        text(name: 'DEPLOY_TEXT', defaultValue: 'One\nTwo\nThree\n', description: '')
+        string(name: 'subaccount_id', defaultValue: 'subaccount_id', description: 'Input the subaccount id')
+        string(name: 'admins', defaultValue: 'sample@email.com', description: '')
     }
 
     stages {
@@ -39,11 +39,11 @@ pipeline {
                         echo env.TF_VAR_global_account_username
                         env.TF_VAR_global_account_subdomain=params.global_account_subdomain
                         env.TF_VAR_cli_server_url=params.cli_server_url
+                        env.TF_VAR_subaccount_id=params.subaccount_id
+                        env.TF_VAR_admins=[params.admins]
+
                         echo env.TF_VAR_cli_server_url
                         echo env.TF_VAR_global_account_subdomain
-                        echo params.admins
-                        env.TF_VAR_subaccount_id=params.subaccount_id
-                        env.TF_VAR_admins=[params.DEPLOY_TEXT]
                         echo env.TF_VAR_admins
 
                         sh '''
@@ -57,6 +57,11 @@ pipeline {
         stage('Terraform apply'){
             steps {
                 echo 'Terraform apply...'
+                script {
+                    echo env.TF_VAR_cli_server_url
+                    echo env.TF_VAR_global_account_subdomain
+                    echo env.TF_VAR_admins
+                }
             }
         }
     }
