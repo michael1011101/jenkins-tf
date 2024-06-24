@@ -11,7 +11,7 @@ pipeline {
     }
 
     parameters {
-        admins=['a','b']
+        string(name: 'admins', defaultValue: 'helle admins', description: 'What should I say?')
     }
 
     stages {
