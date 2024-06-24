@@ -17,9 +17,11 @@ pipeline {
     stages {
         stage('Terraform Init') {
             steps {
+                docker pull hashicorp/terraform:light
                 echo 'Terraform Init..'
                 echo '${pwd}'
                 sh 'pwd'
+                docker run --rm -v ${PWD}:/workspace -w /workspace hashicorp/terraform:light init
             }
         }
 
@@ -31,6 +33,7 @@ pipeline {
                         echo env.TF_VAR_clientsecret
                         echo env.TF_VAR_clientid
                         echo env.cli_server_url
+                        docker run --rm -v ${PWD}:/workspace -w /workspace hashicorp/terraform:light plan
                     }
                 }
             }
