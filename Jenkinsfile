@@ -42,11 +42,11 @@ pipeline {
                         env.TF_VAR_global_account_subdomain=params.global_account_subdomain
                         env.TF_VAR_cli_server_url=params.cli_server_url
                         env.TF_VAR_subaccount_id=params.subaccount_id
-                        env.TF_VAR_admin=params.admins
+                        env.TF_VAR_admins=params.admins
 
                         echo env.TF_VAR_cli_server_url
                         echo env.TF_VAR_global_account_subdomain
-                        echo env.TF_VAR_admin
+                        echo env.TF_VAR_admins
 
                         sh '''
                         terraform plan
