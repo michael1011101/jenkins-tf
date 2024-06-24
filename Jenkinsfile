@@ -10,6 +10,10 @@ pipeline {
         global_account_password='gap'
     }
 
+    parameters {
+        admins=['a','b']
+    }
+
     stages {
         stage('Terraform Init') {
             steps {
@@ -25,11 +29,12 @@ pipeline {
         stage('Terraform Plan'){
             steps {
                 echo 'Terraform apply...'
-                withCredentials([usernamePassword(credentialsId: 'btpProviderCreds', passwordVariable: 'TF_VAR_clientsecret', usernameVariable: 'TF_VAR_clientid')]) {
+                withCredentials([usernamePassword(credentialsId: 'btpProviderCreds', passwordVariable: 'TF_VAR_global_account_password', usernameVariable: 'TF_VAR_global_account_username')]) {
                     script {
                         echo env.TF_VAR_clientsecret
                         echo env.TF_VAR_clientid
                         echo env.cli_server_url
+                        echo params.admins
                     }
                 }
             }
