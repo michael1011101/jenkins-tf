@@ -15,6 +15,7 @@ pipeline {
         string(name: 'cli_server_url', defaultValue: 'https://cli.btp.cloud.sap', description: 'cli_server_url for this global account')
 
         string(name: 'admins', defaultValue: 'helle admins', description: 'What should I say?')
+        text(name: 'DEPLOY_TEXT', defaultValue: 'One\nTwo\nThree\n', description: '')
     }
 
     stages {
@@ -34,13 +35,14 @@ pipeline {
                 echo 'Terraform apply...'
                 withCredentials([usernamePassword(credentialsId: 'btpProviderCreds', passwordVariable: 'TF_VAR_global_account_password', usernameVariable: 'TF_VAR_global_account_username')]) {
                     script {
-                        echo env.TF_VAR_clientsecret
-                        echo env.TF_VAR_clientid
-                        env.TF_VAR_global_account_subdomain=env.global_account_subdomain
-                        env.TF_VAR_cli_server_url=env.cli_server_url
+                        echo env.TF_VAR_global_account_password
+                        echo env.TF_VAR_global_account_username
+                        env.TF_VAR_global_account_subdomain=params.global_account_subdomain
+                        env.TF_VAR_cli_server_url=params.cli_server_url
                         echo env.TF_VAR_cli_server_url
                         echo env.TF_VAR_global_account_subdomain
                         echo params.admins
+                        echo params.DEPLOY_TEXT
                     }
                 }
             }
