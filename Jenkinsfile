@@ -14,7 +14,7 @@ pipeline {
         string(name: 'global_account_subdomain', defaultValue: 'hello subdomain', description: 'subdomain of global account')
         string(name: 'cli_server_url', defaultValue: 'https://cli.btp.cloud.sap', description: 'cli_server_url for this global account')
 
-        string(name: 'admins', defaultValue: 'helle admins', description: 'What should I say?')
+        string(name: 'subaccount_id', defaultValue: 'subaccount_id', description: 'What should I say?')
         text(name: 'DEPLOY_TEXT', defaultValue: 'One\nTwo\nThree\n', description: '')
     }
 
@@ -42,6 +42,7 @@ pipeline {
                         echo env.TF_VAR_cli_server_url
                         echo env.TF_VAR_global_account_subdomain
                         echo params.admins
+                        env.TF_VAR_subaccount_id=params.subaccount_id
                         env.TF_VAR_admins=params.DEPLOY_TEXT
 
                         sh '''
