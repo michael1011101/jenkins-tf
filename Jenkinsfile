@@ -34,7 +34,6 @@ pipeline {
                         echo env.TF_VAR_clientsecret
                         echo env.TF_VAR_clientid
                         echo env.cli_server_url
-                        docker run --rm -v ${PWD}:/workspace -w /workspace hashicorp/terraform:light plan
                     }
                 }
             }
