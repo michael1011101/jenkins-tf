@@ -40,7 +40,7 @@ pipeline {
                         env.TF_VAR_global_account_subdomain=params.global_account_subdomain
                         env.TF_VAR_cli_server_url=params.cli_server_url
                         env.TF_VAR_subaccount_id=params.subaccount_id
-                        env.TF_VAR_admins=[params.admins]
+                        env.TF_VAR_admins=params.admins
 
                         echo env.TF_VAR_cli_server_url
                         echo env.TF_VAR_global_account_subdomain
