@@ -58,8 +58,10 @@ pipeline {
 
         stage('Terraform apply'){
             when {
-                params.auto_approved true
+                beforeAgent true
+                expression { return params.auto_approved }
             }
+
             steps {
                 echo 'Terraform apply...'
                 withCredentials([usernamePassword(credentialsId: 'btpProviderCreds', passwordVariable: 'TF_VAR_global_account_password', usernameVariable: 'TF_VAR_global_account_username')]) {
