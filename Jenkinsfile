@@ -3,13 +3,6 @@
 pipeline {
     agent any
 
-    environment {
-        global_account_subdomain='<abc>'
-        cli_server_url='<abc-cli>'
-        global_account_username='gau'
-        global_account_password='gap'
-    }
-
     parameters {
         string(name: 'global_account_subdomain', defaultValue: 'hana-cloud-dev-cluster', description: 'Input subdomain of global account')
         string(name: 'cli_server_url', defaultValue: 'https://canary.cli.btp.int.sap', description: 'Input cli_server_url for this global account')
@@ -24,9 +17,24 @@ pipeline {
         stage('Clean up workspace') {
             steps {
                 sh '''
-                set +e
-                rm -rf .terraform*
-                rm terraform.tfstate*
+                FILE=terraform.tfstate
+                DIR=.terraform
+
+                # Check if file exists
+                if [ -f "$FILE" ]; then
+                    echo "$FILE exists. Deleting now."
+                    rm terraform.tfstate*
+                else 
+                    echo "$FILE does not exist."
+                fi
+
+                # Check if directory exists
+                if [ -d "$DIR" ]; then
+                    echo "$DIR exists. Deleting now."
+                    rm -r .terraform*
+                else
+                    echo "$DIR does not exist."
+                fi
                 '''
             }
         }
