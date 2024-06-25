@@ -21,6 +21,12 @@ pipeline {
     }
 
     stages {
+        stage('Clean up workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
         stage('Terraform Init') {
             steps {
                 script {
