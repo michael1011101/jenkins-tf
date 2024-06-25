@@ -23,7 +23,10 @@ pipeline {
     stages {
         stage('Clean up workspace') {
             steps {
-                cleanWs()
+                sh '''
+                rm -rf .terraform*
+                rm terraform.tfstate*
+                '''
             }
         }
 
