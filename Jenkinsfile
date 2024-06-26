@@ -97,7 +97,7 @@ pipeline {
     post {
         // only triggered when blue or green sign
         success {
-            notifyBuild()
+            notifyBuild("SUCCESSFUL")
         }
         // triggered when red sign
         failure {
